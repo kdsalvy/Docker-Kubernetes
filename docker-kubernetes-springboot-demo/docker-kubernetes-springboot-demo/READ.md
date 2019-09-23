@@ -1,4 +1,4 @@
-# Introduction to containerization using along with Kubernetes 
+# Introduction to containerization using Docker along with Kubernetes 
 
 ### Spring Boot Application
 A Simple Spring Boot application with only one API /rest/controller.
