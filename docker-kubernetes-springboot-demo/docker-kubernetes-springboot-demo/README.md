@@ -47,7 +47,7 @@ ENTRYPOINT ["/usr/bin/java", "-jar", "-Dspring.profiles.active=default", "/www/s
 ### CMD vs ENTRYPOINT
 CMD/ ENTRYPOINT is the default command to run on start of the container unless specified. In CMD if you specify anything the entire default CMD is replaced but in case of ENTRYPOINT the arguments passed are appended to the existing command.
 
-###Docker Compose
+### Docker Compose
 It is configuration file in which we can put together different services and configuration specific to them. This helps in bringing up the complete application stack but on a single host only.
 
 ### Sample Docker Compose File
@@ -121,7 +121,7 @@ The process in a container have their own PIDs which made it to believe they are
 * Bind Mounting (can map any path on host)
 
 ### Volume Mounting
-* Create a volume using docker volume create {volume name}
+* Create a volume using ```docker volume create {volume name}```
 * Mount the volume to the location which you want to save using 
 	```docker run -v {volume name}:{path} {image name}```
 Docker will automatically create a volume if the given name doesn’t exist
@@ -130,13 +130,13 @@ Docker will automatically create a volume if the given name doesn’t exist
 	docker run –v {complete folder path on host}:{path on container} {image name}
 
 New format
-	docker run \
-	--mount type=bind,source={source full path},target={target full path} {image name}
+	```docker run \
+	--mount type=bind,source={source full path},target={target full path} {image name}```
 
 ### Networking
 * Lists all the network settings
 	```docker inspect {container name}```
-Containers can reach each other using the container name
+* Containers can reach each other using the container name
 	```docker network ls
 	docker run –network={bridge(by default)/host/none} {image name}
 	docker network create \
@@ -170,7 +170,7 @@ New version of replication controller
 ### Deployment
 Deployment encapsulates replica-set and provides way to ensure rolling updates and rollback.
 
-###Updates and rollout in deployment
+### Updates and rollout in deployment
 we can update the image version, labels, selectors etc. We can set the strategy as rollout (default) which deploys-destroys one container at a time.
 
 ## Kubernetes Service
@@ -190,13 +190,16 @@ Enables communication between applications or users outside of the environment. 
 
 ### Kubernetes Commands:
 * To create container: creates and runs a pod/deployment/service defined in k8.yml
-	kubectl create -f k8.yml
+
+	```kubectl create -f k8.yml```
 	
 * To expose container:
-	kubectl expose pod myapp-pod --type=NodePort --name=myapp-service
+
+	```kubectl expose pod myapp-pod --type=NodePort --name=myapp-service```
 	
 * To check container’s port exposed:
-	kubectl describe service myapp-service
+
+	```kubectl describe service myapp-service```
 	
 * Other generally used commands:
 	* kubectl run {name} --image {image name on docker hub}
@@ -218,7 +221,6 @@ Enables communication between applications or users outside of the environment. 
 
 ### Networking in Kubernetes
 We need a networking add-on for the nodes to communicate with each other. Using IP may not be a good idea as it may get changed on each deployment.
-
 
 ### Kubernetes YAML structure
 
@@ -252,13 +254,16 @@ We need a networking add-on for the nodes to communicate with each other. Using 
                             
 * Kind refers to the type of object we intend to use
 * Metadata is the details about the object being deployed
-	metadata:
+
+	```metadata:
 	    name: myapp-pod
 	    labels:
 	        app: myapp
-	        type: front-end
+	        type: front-end```
+	        
 * Spec contains the specifications required for the kind we are using. Different kinds need different specification which can be looked upon on kubernetes site. Spec is dictionary type and containers is 
-	spec:
+	
+	```spec:
 	    containers:
 	        - name: {container name}
 	          image: {image name}
