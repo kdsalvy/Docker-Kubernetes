@@ -38,11 +38,11 @@ A Simple Spring Boot application with only one API /rest/controller.
 
 ### Sample Docker File
 
-FROM ubuntu
-RUN apt-get update
-RUN apt-get install -y openjdk-8-jre
-ADD ./target/spring-rest-app-1.0.jar /www/spring-rest-app-1.0.jar
-ENTRYPOINT ["/usr/bin/java", "-jar", "-Dspring.profiles.active=default", "/www/spring-rest-app-1.0.jar"]
+	FROM ubuntu
+	RUN apt-get update
+	RUN apt-get install -y openjdk-8-jre
+	ADD ./target/spring-rest-app-1.0.jar /www/spring-rest-app-1.0.jar
+	ENTRYPOINT ["/usr/bin/java", "-jar", "-Dspring.profiles.active=default", "/www/spring-rest-app-1.0.jar"]
 
 ### CMD vs ENTRYPOINT
 CMD/ ENTRYPOINT is the default command to run on start of the container unless specified. In CMD if you specify anything the entire default CMD is replaced but in case of ENTRYPOINT the arguments passed are appended to the existing command.
@@ -124,14 +124,13 @@ The process in a container have their own PIDs which made it to believe they are
 * Create a volume using ```docker volume create {volume name}```
 * Mount the volume to the location which you want to save using 
 	```docker run -v {volume name}:{path} {image name}```
-Docker will automatically create a volume if the given name doesn’t exist
+* Docker will automatically create a volume if the given name doesn’t exist
 
 ### Bind Mounting
 	docker run –v {complete folder path on host}:{path on container} {image name}
 
 New format
-	```docker run \
-	--mount type=bind,source={source full path},target={target full path} {image name}```
+	```docker run --mount type=bind,source={source full path},target={target full path} {image name}```
 
 ### Networking
 * Lists all the network settings
@@ -142,7 +141,7 @@ New format
 	docker network create \
 	--driver bridge \
 	--subnet {subnet ip/port}
-	{custom isolated network name}```
+	{custom isolated network name}
 * Example:
 	```docker network create --driver bridge --subnet 182.18.0.1/24 wp-mysql-network --gateway 182.18.0.1```
 
@@ -259,7 +258,7 @@ We need a networking add-on for the nodes to communicate with each other. Using 
 	    name: myapp-pod
 	    labels:
 	        app: myapp
-	        type: front-end```
+	        type: front-end
 	        
 * Spec contains the specifications required for the kind we are using. Different kinds need different specification which can be looked upon on kubernetes site. Spec is dictionary type and containers is 
 	
