@@ -4,6 +4,7 @@ metadata:
   name: myapp-pod
   labels:
     app: myapp
+    type: backend
 spec:
   containers:
     - name: springboot-docker

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-clusterip-service
+  labels:
+    app: myapp
+spec:
+  type: ClusterIP
+  selector:
+    app: myapp
+    type: backend
+  ports:
+    - port: 80 # service port
+      targetPort: 8080 # application port
+  clusterIP: 10.96.0.2 # cluster ip can be used by applications internally to communicate between them

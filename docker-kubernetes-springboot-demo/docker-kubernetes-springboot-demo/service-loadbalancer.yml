@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-loadbalancer-service
+  labels:
+    app: myapp
+spec:
+  type: LoadBalancer
+  selector:
+    app: myapp
+    type: backend
+  ports:
+    - port: 80 # service port
+      targetPort: 8080 # application port
+      nodePort: 30080 # node port
+  clusterIP: 10.96.0.2
+#  externalIPs: external IPs can be provided if there exists one to connect to the machine
+#    - 80.11.12.10
+status:
+  loadBalancer:
+    ingress:
+      - ip: 192.0.2.127

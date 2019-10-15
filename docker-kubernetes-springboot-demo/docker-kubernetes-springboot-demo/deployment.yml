@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: 
+  name: myapp-deployment
+  labels:
+    app: myapp
+    type: backend
+spec: 
+  replicas: 3
+  selector:
+    matchLabels: 
+      type: backend
+  template: 
+    metadata: 
+      labels: 
+        app: myapp
+        type: backend
+      name: myapp-pod
+    spec: 
+      containers: 
+        - 
+          image: skedia/docker-kubernetes-springboot-demo
+          name: springboot-docker

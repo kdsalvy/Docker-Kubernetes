@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replica-set
+  labels:
+    app: myapp
+    type: backend
+spec:
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: backend
+    spec:
+      containers:
+        - name: springboot-docker
+          image: skedia/docker-kubernetes-springboot-demo
+  replicas: 3
+  selector:
+    matchLabels:
+      type: backend
