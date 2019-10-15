@@ -123,7 +123,7 @@ The process in a container have their own PIDs which made it to believe they are
 ### Volume Mounting
 * Create a volume using docker volume create {volume name}
 * Mount the volume to the location which you want to save using 
-	docker run -v {volume name}:{path} {image name}
+	```docker run -v {volume name}:{path} {image name}```
 Docker will automatically create a volume if the given name doesn’t exist
 
 ### Bind Mounting
@@ -135,16 +135,16 @@ New format
 
 ### Networking
 * Lists all the network settings
-	docker inspect {container name}
+	```docker inspect {container name}```
 Containers can reach each other using the container name
-	docker network ls
+	```docker network ls
 	docker run –network={bridge(by default)/host/none} {image name}
 	docker network create \
 	--driver bridge \
 	--subnet {subnet ip/port}
-	{custom isolated network name}
+	{custom isolated network name}```
 * Example:
-	docker network create --driver bridge --subnet 182.18.0.1/24 wp-mysql-network --gateway 182.18.0.1
+	```docker network create --driver bridge --subnet 182.18.0.1/24 wp-mysql-network --gateway 182.18.0.1```
 
 ## Kubernetes
 
@@ -170,7 +170,8 @@ New version of replication controller
 ### Deployment
 Deployment encapsulates replica-set and provides way to ensure rolling updates and rollback.
 
-#### Updates and rollout in deployment – we can update the image version, labels, selectors etc. We can set the strategy as rollout (default) which deploys-destroys one container at a time.
+###Updates and rollout in deployment
+we can update the image version, labels, selectors etc. We can set the strategy as rollout (default) which deploys-destroys one container at a time.
 
 ## Kubernetes Service
 
@@ -179,41 +180,44 @@ Enables communication between applications or users outside of the environment. 
 * NodePort: Listens & maps a port on the node to the port on the pod and make it accessible to the outside world.
 * LoadBalancer: Creates and exposes external IP on the node and is used to cofigure ingress rules.
 
-###Kubernetes Components
+### Kubernetes Components
 
 * Master components: They provide the cluster’s control plane. Master components make global decisions about the cluster 
-** kube-apiserver: Component on the master that exposes the Kubernetes API
-** etcd: Consistent and highly-available key value store used as Kubernetes’ backing store for all cluster data.
-** kube-scheduler: Component on the master that watches newly created pods that have no node assigned, and selects a node for them to run on.
-** kube-controller-manager: 
+	* kube-apiserver: Component on the master that exposes the Kubernetes API
+	* etcd: Consistent and highly-available key value store used as Kubernetes’ backing store for all cluster data.
+	* kube-scheduler: Component on the master that watches newly created pods that have no node assigned, and selects a node for them to run on.
+	* kube-controller-manager: 
 
 ### Kubernetes Commands:
 * To create container: creates and runs a pod/deployment/service defined in k8.yml
 	kubectl create -f k8.yml
+	
 * To expose container:
 	kubectl expose pod myapp-pod --type=NodePort --name=myapp-service
+	
 * To check container’s port exposed:
 	kubectl describe service myapp-service
+	
 * Other generally used commands:
-	kubectl run {name} --image {image name on docker hub}
-	kubectl get pods
-	kubectl describe pod {pod name}
-	kubectl get pods -o wide
-	kubectl get replicationcontroller
-	kubectl get replicaset
-	kubectl replace -f {replica set yaml file}
-	kubectl create -f {replica set yaml file}
-	kubectl delete replicaset {replica-set name}
-	kubectl scale --replicas=6 -f {replica set yaml file}
-	kubectl scale --replicas=6 replicaset {replica-set name}
-	kubectl create -f {deployment yaml file}
-	kubectl rollout status {deployment name}
-	kubectl rollout history {deployment name}
-	kubectl apply -f {deployment yaml file}
-	kubectl rollout undo {deployment yaml file}
+	* kubectl run {name} --image {image name on docker hub}
+	* kubectl get pods
+	* kubectl describe pod {pod name}
+	* kubectl get pods -o wide
+	* kubectl get replicationcontroller
+	* kubectl get replicaset
+	* kubectl replace -f {replica set yaml file}
+	* kubectl create -f {replica set yaml file}
+	* kubectl delete replicaset {replica-set name}
+	* kubectl scale --replicas=6 -f {replica set yaml file}
+	* kubectl scale --replicas=6 replicaset {replica-set name}
+	* kubectl create -f {deployment yaml file}
+	* kubectl rollout status {deployment name}
+	* kubectl rollout history {deployment name}
+	* kubectl apply -f {deployment yaml file}
+	* kubectl rollout undo {deployment yaml file}
 
 ### Networking in Kubernetes
-	We need a networking add-on for the nodes to communicate with each other. Using IP may not be a good idea as it may get changed on each deployment.
+We need a networking add-on for the nodes to communicate with each other. Using IP may not be a good idea as it may get changed on each deployment.
 
 
 ### Kubernetes YAML structure
@@ -238,12 +242,13 @@ Enables communication between applications or users outside of the environment. 
 	      image: skedia/docker-kubernetes-springboot-demo
 
 * apiVersion is the kubernetes version that we want kubectl to use. Below table gives different versions for different kinds
-	| Kind		 |	Version |
-	|------------|----------|
-	| POD		 |	v1      |
-	| Service	 |	v1      |
-	| ReplicaSet |	apps/v1 |
-	| Deployment |	apps/v1 |
+	
+		Kind        |  Version  |
+		----------- | --------- |
+		POD         |  v1       |
+		Service     |  v1       |
+		ReplicaSet  |  apps/v1  |
+		Deployment  |  apps/v1  |
                             
 * Kind refers to the type of object we intend to use
 * Metadata is the details about the object being deployed
