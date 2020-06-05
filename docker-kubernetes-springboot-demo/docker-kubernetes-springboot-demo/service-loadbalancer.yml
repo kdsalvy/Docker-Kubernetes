@@ -14,9 +14,9 @@ spec:
       targetPort: 8080 # application port
       nodePort: 30080 # node port
   clusterIP: 10.96.0.2
-#  externalIPs: external IPs can be provided if there exists one to connect to the machine
-#    - 80.11.12.10
+  externalIPs: #external IPs can be provided if there exists one to connect to the machine
+    - 80.11.12.10
 status:
   loadBalancer:
     ingress:
-      - ip: 192.0.2.127
+      - ip: 192.0.2.89

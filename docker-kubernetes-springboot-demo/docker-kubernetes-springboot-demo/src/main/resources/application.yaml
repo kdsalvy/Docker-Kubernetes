@@ -1,1 +1,12 @@
-
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health, info, metrics, env
+        
+        
+        
+spring:
+  profiles:
+    active: local
